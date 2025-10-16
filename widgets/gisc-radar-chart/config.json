@@ -1,0 +1,13 @@
+{
+  "chartOptions": {
+    "title": "Radar Chart",
+    "showLegend": true,
+    "showGrid": true,
+    "scaleMin": 0,
+    "scaleMax": 100
+  },
+  "fieldMapping": {
+    "labelField": "",
+    "valueFields": []
+  }
+}

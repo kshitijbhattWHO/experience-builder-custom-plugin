@@ -1,0 +1,38 @@
+{
+  "name": "gisc-radar-chart",
+  "label": "GISC Radar Chart",
+  "type": "widget",
+  "version": "1.0.0",
+  "exbVersion": "1.18.0",
+  "author": "GISC Team",
+  "description": "A customizable radar/spider chart widget for visualizing multi-dimensional data using Chart.js",
+  "copyright": "",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "publishMessages": [
+    {
+      "messageType": "DATA_RECORDS_SELECTION_CHANGE",
+      "messageCarryData": "OUTPUT_DATA_SOURCE"
+    }
+  ],
+  "messageActions": [
+    {
+      "name": "updateChart",
+      "label": "Update Chart",
+      "uri": "message-actions/update-chart-action",
+      "settingUri": "message-actions/update-chart-action-setting"
+    }
+  ],
+  "properties": {
+    "hasSettingPage": true,
+    "canConsumeDataAction": true,
+    "supportInlineEditing": false,
+    "coverLayoutBackground": true
+  },
+  "defaultSize": {
+    "width": 600,
+    "height": 500
+  },
+  "translatedLocales": [
+    "en"
+  ]
+}
