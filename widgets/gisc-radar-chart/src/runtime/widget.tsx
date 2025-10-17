@@ -224,7 +224,7 @@ const WidgetWithDataSourceManagers = (props: AllWidgetProps<IMConfig>): JSX.Elem
           <div css={emptyStateStyle}>
             <div className="icon">📊</div>
             <h3>No Data Available</h3>
-            <p>Configure the widget settings to display data</p>
+            <p>{config.chartOptions?.noDataMessage || 'Configure the widget settings to display data'}</p>
           </div>
         </div>
       )}

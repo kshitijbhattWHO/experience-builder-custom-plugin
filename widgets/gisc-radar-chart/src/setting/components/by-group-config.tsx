@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { React, jsx, Immutable, type UseDataSource, type ImmutableArray } from 'jimu-core'
 import { SettingRow } from 'jimu-ui/advanced/setting-components'
-import { Label } from 'jimu-ui'
-import type { ByGroupConfig, RadarStatisticType } from '../../config'
+import { Label, Select, Option, NumericInput } from 'jimu-ui'
+import type { ByGroupConfig, RadarStatisticType, SortByOption, SortOrder } from '../../config'
 import { CompactFieldSelector } from './field-selector-compact'
 import { StatisticsSelector } from './statistics-selector'
 
@@ -71,6 +71,36 @@ const ByGroupConfigComponent: React.FC<ByGroupConfigProps> = ({
     })
   }
 
+  const handleMaxCategoriesChange = (value: number) => {
+    onChange({
+      ...config,
+      categoryField: config?.categoryField || '',
+      numericField: config?.numericField || '',
+      statisticType: config?.statisticType || 'sum',
+      maxCategories: value > 0 ? value : undefined
+    })
+  }
+
+  const handleSortByChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange({
+      ...config,
+      categoryField: config?.categoryField || '',
+      numericField: config?.numericField || '',
+      statisticType: config?.statisticType || 'sum',
+      sortBy: evt.target.value as SortByOption
+    })
+  }
+
+  const handleSortOrderChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange({
+      ...config,
+      categoryField: config?.categoryField || '',
+      numericField: config?.numericField || '',
+      statisticType: config?.statisticType || 'sum',
+      sortOrder: evt.target.value as SortOrder
+    })
+  }
+
   return (
     <React.Fragment>
       <SettingRow>
@@ -120,6 +150,47 @@ const ByGroupConfigComponent: React.FC<ByGroupConfigProps> = ({
           isMultiple={false}
           className="w-100"
           aria-label="Split By Field"
+        />
+      </SettingRow>
+
+      <SettingRow label="Sort By" flow="wrap">
+        <Select
+          className="w-100"
+          size="sm"
+          value={config?.sortBy || 'category'}
+          onChange={handleSortByChange}
+          aria-label="Sort By"
+        >
+          <Option value="category">Category</Option>
+          <Option value="value">Value</Option>
+        </Select>
+      </SettingRow>
+
+      <SettingRow label="Sort Order" flow="wrap">
+        <Select
+          className="w-100"
+          size="sm"
+          value={config?.sortOrder || 'asc'}
+          onChange={handleSortOrderChange}
+          aria-label="Sort Order"
+        >
+          <Option value="asc">Ascending</Option>
+          <Option value="desc">Descending</Option>
+        </Select>
+      </SettingRow>
+
+      <SettingRow label="Maximum Categories" flow="wrap">
+        <Label className="w-100 text-break" style={{ fontSize: '0.75rem', color: '#6c757d', marginBottom: '4px' }}>
+          Limit the number of axes on the radar chart (prevents overcrowding)
+        </Label>
+        <NumericInput
+          className="w-100"
+          size="sm"
+          value={config?.maxCategories}
+          onChange={handleMaxCategoriesChange}
+          min={3}
+          max={20}
+          placeholder="All categories"
         />
       </SettingRow>
     </React.Fragment>

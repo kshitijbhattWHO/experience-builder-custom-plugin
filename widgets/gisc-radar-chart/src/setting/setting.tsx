@@ -84,6 +84,13 @@ export default class Setting extends React.PureComponent<
   }
 
   /**
+   * Update no data message
+   */
+  onNoDataMessageChange = (value: string) => {
+    this.onChartOptionChange('noDataMessage', value)
+  }
+
+  /**
    * Update custom colors
    */
   onColorsChange = (colors: string[]) => {
@@ -295,6 +302,20 @@ export default class Setting extends React.PureComponent<
               value={config.chartOptions?.scaleMax ?? 100}
               onChange={this.onScaleMaxChange}
               min={1}
+            />
+          </SettingRow>
+
+          <SettingRow label="No Data Message" flow="wrap">
+            <Label className="w-100 text-break" style={{ fontSize: '0.75rem', color: '#6c757d', marginBottom: '4px' }}>
+              Custom message when no data is available
+            </Label>
+            <TextInput
+              className="w-100"
+              type="text"
+              size="sm"
+              value={config.chartOptions?.noDataMessage || ''}
+              onChange={this.onNoDataMessageChange}
+              placeholder="No data available"
             />
           </SettingRow>
         </SettingSection>

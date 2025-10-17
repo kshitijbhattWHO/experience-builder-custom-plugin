@@ -30,6 +30,16 @@ export interface FieldMapping {
 }
 
 /**
+ * Sort order options
+ */
+export type SortOrder = 'asc' | 'desc'
+
+/**
+ * Sort by options
+ */
+export type SortByOption = 'value' | 'category'
+
+/**
  * By Group configuration - for category-based aggregation
  * Each unique value in categoryField becomes an axis on the radar
  * Multiple series can be created via splitByField
@@ -43,6 +53,12 @@ export interface ByGroupConfig {
   statisticType: RadarStatisticType
   /** Optional field to create multiple polygons for comparison */
   splitByField?: string
+  /** Maximum number of categories to display (limits axes on radar chart) */
+  maxCategories?: number
+  /** Sort by value or category name */
+  sortBy?: SortByOption
+  /** Sort order: ascending or descending */
+  sortOrder?: SortOrder
 }
 
 /**
@@ -93,6 +109,8 @@ export interface ChartOptions {
   pointRadius?: number
   /** Fill opacity (0-1) */
   fillOpacity?: number
+  /** Custom message to display when no data is available */
+  noDataMessage?: string
 }
 
 /**

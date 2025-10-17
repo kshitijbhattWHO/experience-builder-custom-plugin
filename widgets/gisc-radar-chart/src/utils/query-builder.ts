@@ -35,7 +35,7 @@ export const createByGroupQuery = (
   config: ByGroupConfig,
   pageSize?: number
 ): FeatureLayerQueryParams => {
-  const { categoryField, numericField, statisticType, splitByField } = config
+  const { categoryField, numericField, statisticType, splitByField, sortBy, sortOrder, maxCategories } = config
 
   const groupByFieldsForStatistics = [categoryField]
   let where = ''
@@ -45,6 +45,9 @@ export const createByGroupQuery = (
     where = `${splitByField}={value}`
   }
 
+  // Use maxCategories if specified, otherwise use default pageSize
+  const resultPageSize = maxCategories || pageSize
+
   // Handle no-aggregation case (raw field values)
   if (statisticType === 'no_aggregation') {
     const outFields = numericField ? [numericField] : ['']
@@ -53,11 +56,18 @@ export const createByGroupQuery = (
       outFields
     }
 
-    if (pageSize) {
-      query.pageSize = pageSize
+    if (resultPageSize) {
+      query.pageSize = resultPageSize
     }
     if (where) {
       query.where = where
+    }
+
+    // Add sorting
+    if (sortBy && categoryField) {
+      const sortField = sortBy === 'category' ? categoryField : numericField
+      const order = sortOrder === 'desc' ? 'DESC' : 'ASC'
+      query.orderByFields = [`${sortField} ${order}`]
     }
 
     return query
@@ -84,11 +94,18 @@ export const createByGroupQuery = (
     outStatistics: [outStatistic]
   }
 
-  if (pageSize) {
-    query.pageSize = pageSize
+  if (resultPageSize) {
+    query.pageSize = resultPageSize
   }
   if (where) {
     query.where = where
+  }
+
+  // Add sorting
+  if (sortBy && categoryField) {
+    const sortField = sortBy === 'category' ? categoryField : outStatisticFieldName
+    const order = sortOrder === 'desc' ? 'DESC' : 'ASC'
+    query.orderByFields = [`${sortField} ${order}`]
   }
 
   return query

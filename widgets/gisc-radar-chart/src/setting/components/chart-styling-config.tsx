@@ -29,8 +29,12 @@ const ChartStylingConfig: React.FC<ChartStylingConfigProps> = ({
   const currentColors = colors.length > 0 ? colors : DEFAULT_COLORS
 
   const handleColorChange = (index: number, color: string) => {
+    console.log('[ChartStylingConfig] Color changed:', { index, color, type: typeof color })
     const newColors = [...currentColors]
-    newColors[index] = color
+    // ThemeColorPicker might return color object or string - ensure it's a string
+    const colorValue = typeof color === 'string' ? color : (color as any)?.color || color
+    newColors[index] = colorValue
+    console.log('[ChartStylingConfig] New colors array:', newColors)
     onColorsChange(newColors)
   }
 
