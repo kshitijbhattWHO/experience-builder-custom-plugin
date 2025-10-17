@@ -32,7 +32,8 @@ export const createRecordsFromRadarChartData = (
       // Add individual axis values if needed for filtering
       ...labels.reduce((acc, label, idx) => {
         const value = Array.isArray(dataset.data) ? dataset.data[idx] : null
-        acc[`${label}`] = value
+        const labelKey = typeof label === 'string' ? label : JSON.stringify(label)
+        acc[labelKey] = value
         return acc
       }, {})
     }
@@ -78,7 +79,8 @@ export const getDataItemsFromRadarData = (chartData: ChartData<'radar'>): any[] 
     // Add each axis value as a separate field
     labels.forEach((label, idx) => {
       const value = Array.isArray(dataset.data) ? dataset.data[idx] : null
-      item[String(label)] = value
+      const labelKey = typeof label === 'string' ? label : JSON.stringify(label)
+      item[labelKey] = value
     })
 
     return item

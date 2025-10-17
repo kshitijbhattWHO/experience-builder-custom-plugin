@@ -12,11 +12,8 @@ import {
   MessageType,
   type Message,
   type MessageDescription,
-  DataSourceManager,
   MutableStoreManager,
   type DataRecordsSelectionChangeMessage,
-  type DataSource,
-  type ArcGISQueriableDataSource,
   getAppStore
 } from 'jimu-core'
 import type { UpdateChartMessageActionConfig } from './update-chart-action-setting'
@@ -69,12 +66,12 @@ export default class UpdateChartAction extends AbstractMessageAction {
    * This method processes the incoming selection message and updates the chart
    * to highlight or filter the selected records based on the widget's configured label field
    */
-  async onExecute (message: Message, actionConfig?: UpdateChartMessageActionConfig): Promise<boolean> {
+  onExecute (message: Message, actionConfig?: UpdateChartMessageActionConfig): Promise<boolean> {
     try {
       // Only handle DATA_RECORDS_SELECTION_CHANGE messages
       if (message.type !== MessageType.DataRecordsSelectionChange) {
         console.log('[UpdateChartAction] Ignoring non-selection message:', message.type)
-        return false
+        return Promise.resolve(false)
       }
 
       const selectionMessage = message as DataRecordsSelectionChangeMessage
@@ -86,7 +83,7 @@ export default class UpdateChartAction extends AbstractMessageAction {
       if (records.length === 0) {
         console.log('[UpdateChartAction] No records selected, clearing filter')
         MutableStoreManager.getInstance().updateStateValue(this.widgetId, 'chartFilterValue', null)
-        return true
+        return Promise.resolve(true)
       }
 
       // Get widget configuration to know which field is the label field
@@ -102,7 +99,7 @@ export default class UpdateChartAction extends AbstractMessageAction {
 
       if (!labelField) {
         console.warn('[UpdateChartAction] No label field configured in widget, cannot filter')
-        return false
+        return Promise.resolve(false)
       }
 
       // Extract record labels based on the configured label field
@@ -145,10 +142,10 @@ export default class UpdateChartAction extends AbstractMessageAction {
         chartFilterValue
       )
 
-      return true
+      return Promise.resolve(true)
     } catch (error) {
       console.error('[UpdateChartAction] Error executing update chart action:', error)
-      return false
+      return Promise.resolve(false)
     }
   }
 

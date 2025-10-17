@@ -1,4 +1,4 @@
-import { css, type SerializedStyles } from 'jimu-core'
+import { css } from 'jimu-core'
 
 /**
  * Widget container styles

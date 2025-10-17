@@ -21,7 +21,7 @@ import {
   type IMThemeVariables,
   polished
 } from 'jimu-core'
-import { Radio, Label, Switch } from 'jimu-ui'
+import { Radio, Label } from 'jimu-ui'
 import { SettingSection, SettingRow } from 'jimu-ui/advanced/setting-components'
 import { DataSourceSelector } from 'jimu-ui/advanced/data-source-selector'
 import { withTheme } from 'jimu-theme'
@@ -138,7 +138,7 @@ class _UpdateChartActionSetting extends React.PureComponent<
 
   render () {
     const { config, theme } = this.props
-    const useAutomatic = config.useAnyTriggerData !== false
+    const useAutomatic = config.useAnyTriggerData
 
     const connectionModeLabel = 'Connection Mode'
     const automaticLabel = 'Automatic'

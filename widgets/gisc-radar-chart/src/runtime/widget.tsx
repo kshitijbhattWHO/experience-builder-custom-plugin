@@ -3,19 +3,14 @@ import {
   React,
   jsx,
   type AllWidgetProps,
-  DataSourceComponent,
   MutableStoreManager,
-  MessageManager,
-  type DataRecordsSelectionChangeMessage,
-  DataRecord,
   type DataSourceStatus
 } from 'jimu-core'
-import { type IMConfig } from '../config'
+import type { IMConfig } from '../config'
 import RadarChartComponent from './chart-component'
 import { useRadarData } from './hooks/use-radar-data'
 import { useRadarQueryData } from './hooks/use-radar-query-data'
 import { generateMockData, adjustColorAlpha } from '../utils/data-transformer'
-import { validateWidgetConfig } from '../utils/validators'
 import {
   widgetContainerStyle,
   chartWrapperStyle,

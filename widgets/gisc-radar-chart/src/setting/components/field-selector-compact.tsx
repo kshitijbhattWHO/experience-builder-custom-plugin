@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { React, jsx, css, type ImmutableArray, hooks, Immutable, JimuFieldType } from 'jimu-core'
+import { React, jsx, css, type ImmutableArray, hooks, Immutable, JimuFieldType, type IMUseDataSource } from 'jimu-core'
 import { FieldSelector as JimuFieldSelector } from 'jimu-ui/advanced/data-source-selector'
-import type { IMUseDataSource } from 'jimu-core'
 
 export type FieldType = 'numeric' | 'category' | 'date' | 'all'
 

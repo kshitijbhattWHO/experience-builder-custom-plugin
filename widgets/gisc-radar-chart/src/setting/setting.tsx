@@ -3,10 +3,9 @@ import {
   React,
   jsx,
   Immutable,
-  type ImmutableObject,
   type UseDataSource
 } from 'jimu-core'
-import { type AllWidgetSettingProps } from 'jimu-for-builder'
+import type { AllWidgetSettingProps } from 'jimu-for-builder'
 import {
   SettingSection,
   SettingRow

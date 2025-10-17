@@ -1,5 +1,5 @@
 import { React } from 'jimu-core'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Widget from '../src/runtime/widget'
 import { generateMockData } from '../src/utils/data-transformer'
@@ -42,7 +42,7 @@ describe('GISC Radar Chart Widget', () => {
   })
 
   it('displays chart title from config', () => {
-    const { container } = render(<Widget {...mockProps as any} />)
+    render(<Widget {...mockProps as any} />)
     // Chart title is passed to RadarChartComponent
     expect(mockConfig.chartOptions.title).toBe('Test Radar Chart')
   })

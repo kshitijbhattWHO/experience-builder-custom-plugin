@@ -1,5 +1,5 @@
 import { React } from 'jimu-core'
-import type { DataSource, FeatureLayerQueryParams, QueriableDataSource } from 'jimu-core'
+import type { DataSource, QueriableDataSource } from 'jimu-core'
 import type { ChartData } from 'chart.js'
 import { CategoryType, type RadarChartDataSource, type ByGroupConfig, type ByFieldConfig } from '../../config'
 
@@ -141,6 +141,7 @@ export const useRadarQueryData = (
       setData(null)
       setLoading(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSource, radarChartDataSource, colors, pointRadius, fillOpacity, queryVersion])
 
   React.useEffect(() => {

@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { React, jsx, Immutable, type UseDataSource, type ImmutableArray } from 'jimu-core'
 import { SettingRow } from 'jimu-ui/advanced/setting-components'
-import { Label } from 'jimu-ui'
 import type { ByFieldConfig, RadarStatisticType } from '../../config'
 import { CompactFieldSelector } from './field-selector-compact'
 import { StatisticsSelector } from './statistics-selector'

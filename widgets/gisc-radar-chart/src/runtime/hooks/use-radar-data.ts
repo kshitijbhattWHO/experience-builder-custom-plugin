@@ -160,6 +160,7 @@ export const useRadarData = (
       setData(null)
       setLoading(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSource, fieldMappingStr, colorsStr, pointRadius, fillOpacity, queryVersion])
 
   React.useEffect(() => {

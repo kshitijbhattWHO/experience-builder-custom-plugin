@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { React, jsx, css } from 'jimu-core'
 import { SettingRow } from 'jimu-ui/advanced/setting-components'
-import { Slider, Button, Label } from 'jimu-ui'
+import { Slider, Button } from 'jimu-ui'
 import { ThemeColorPicker } from 'jimu-ui/basic/color-picker'
 import { PlusOutlined } from 'jimu-icons/outlined/editor/plus'
 import { CloseOutlined } from 'jimu-icons/outlined/editor/close'
@@ -58,7 +58,7 @@ const ChartStylingConfig: React.FC<ChartStylingConfigProps> = ({
           <div className="flex-grow-1">
             <Slider
               value={chartOptions.pointRadius ?? 3}
-              onChange={(e) => onChange('pointRadius', Number(e.target.value))}
+              onChange={(e) => { onChange('pointRadius', Number(e.target.value)) }}
               min={0}
               max={10}
               step={1}
@@ -82,7 +82,7 @@ const ChartStylingConfig: React.FC<ChartStylingConfigProps> = ({
           <div className="flex-grow-1">
             <Slider
               value={Math.round((chartOptions.fillOpacity ?? 0.2) * 100)}
-              onChange={(e) => onChange('fillOpacity', Number(e.target.value) / 100)}
+              onChange={(e) => { onChange('fillOpacity', Number(e.target.value) / 100) }}
               min={0}
               max={100}
               step={5}
@@ -115,7 +115,7 @@ const ChartStylingConfig: React.FC<ChartStylingConfigProps> = ({
                 className="flex-grow-1"
                 specificTheme={theme}
                 value={color}
-                onChange={(newColor) => handleColorChange(index, newColor)}
+                onChange={(newColor) => { handleColorChange(index, newColor) }}
               />
               <span css={css`
                 font-size: 12px;
@@ -129,7 +129,7 @@ const ChartStylingConfig: React.FC<ChartStylingConfigProps> = ({
                   size="sm"
                   type="tertiary"
                   icon
-                  onClick={() => handleRemoveColor(index)}
+                  onClick={() => { handleRemoveColor(index) }}
                   aria-label={`Remove series ${index + 1} color`}
                 >
                   <CloseOutlined />

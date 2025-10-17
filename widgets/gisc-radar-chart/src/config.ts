@@ -1,4 +1,4 @@
-import type { ImmutableObject, UseDataSource, StatisticDefinition, FeatureLayerQueryParams } from 'jimu-core'
+import type { ImmutableObject, UseDataSource, FeatureLayerQueryParams } from 'jimu-core'
 
 /**
  * Category types for data aggregation and visualization

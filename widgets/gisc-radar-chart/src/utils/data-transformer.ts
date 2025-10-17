@@ -270,7 +270,7 @@ export const aggregateByLabel = (
     if (!aggregated.has(label)) {
       aggregated.set(label, [])
     }
-    aggregated.get(label)!.push(value)
+    aggregated.get(label).push(value)
   })
 
   const result = new Map<string, number>()
@@ -291,8 +291,6 @@ export const aggregateByLabel = (
       case 'max':
         aggregatedValue = Math.max(...values)
         break
-      default:
-        aggregatedValue = values.reduce((a, b) => a + b, 0) / values.length
     }
 
     result.set(label, aggregatedValue)
