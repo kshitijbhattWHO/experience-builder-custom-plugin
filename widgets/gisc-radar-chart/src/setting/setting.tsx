@@ -327,7 +327,6 @@ export default class Setting extends React.PureComponent<
             chartOptions={config.chartOptions}
             onChange={this.onChartOptionChange}
             onColorsChange={this.onColorsChange}
-            theme={this.props.theme}
           />
         </SettingSection>
         </div>

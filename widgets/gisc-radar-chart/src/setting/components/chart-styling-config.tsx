@@ -2,7 +2,7 @@
 import { React, jsx, css } from 'jimu-core'
 import { SettingRow } from 'jimu-ui/advanced/setting-components'
 import { Slider, Button } from 'jimu-ui'
-import { ThemeColorPicker } from 'jimu-ui/basic/color-picker'
+import { ColorPicker } from 'jimu-ui/basic/color-picker'
 import { PlusOutlined } from 'jimu-icons/outlined/editor/plus'
 import { CloseOutlined } from 'jimu-icons/outlined/editor/close'
 import type { ChartOptions } from '../../config'
@@ -13,7 +13,6 @@ interface ChartStylingConfigProps {
   chartOptions: ChartOptions
   onChange: (key: string, value: any) => void
   onColorsChange: (colors: string[]) => void
-  theme?: any
 }
 
 /**
@@ -23,8 +22,7 @@ const ChartStylingConfig: React.FC<ChartStylingConfigProps> = ({
   colors = [],
   chartOptions,
   onChange,
-  onColorsChange,
-  theme
+  onColorsChange
 }) => {
   const currentColors = colors.length > 0 ? colors : DEFAULT_COLORS
 
@@ -115,10 +113,9 @@ const ChartStylingConfig: React.FC<ChartStylingConfigProps> = ({
                 gap: 8px;
               `}
             >
-              <ThemeColorPicker
+              <ColorPicker
                 className="flex-grow-1"
-                specificTheme={theme}
-                value={color}
+                color={color}
                 onChange={(newColor) => { handleColorChange(index, newColor) }}
               />
               <span css={css`
