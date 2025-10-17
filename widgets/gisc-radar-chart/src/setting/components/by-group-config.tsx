@@ -51,12 +51,12 @@ const ByGroupConfigComponent: React.FC<ByGroupConfigProps> = ({
     })
   }
 
-  const handleStatisticTypeChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleStatisticTypeChange = (statisticType: RadarStatisticType) => {
     onChange({
       ...config,
       categoryField: config?.categoryField || '',
       numericField: config?.numericField || '',
-      statisticType: evt.target.value as RadarStatisticType
+      statisticType
     })
   }
 
