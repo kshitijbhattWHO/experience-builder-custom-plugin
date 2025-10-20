@@ -41,7 +41,15 @@ export default class Setting extends React.PureComponent<
    * Update chart options
    */
   onChartOptionChange = (key: string, value: any) => {
-    const newChartOptions = this.props.config.chartOptions.set(key, value)
+    const newChartOptions = this.props.config.chartOptions
+      ? this.props.config.chartOptions.set(key, value)
+      : Immutable({
+          showLegend: true,
+          showGrid: true,
+          scaleMin: 0,
+          scaleMax: 100,
+          [key]: value
+        })
     this.props.onSettingChange({
       id: this.props.id,
       config: this.props.config.set('chartOptions', newChartOptions)
@@ -51,8 +59,9 @@ export default class Setting extends React.PureComponent<
   /**
    * Update chart title
    */
-  onTitleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    this.onChartOptionChange('title', evt.target.value)
+  onTitleChange = (value: string) => {
+    // Store undefined instead of empty string to avoid recursion issues
+    this.onChartOptionChange('title', value || undefined)
   }
 
   /**
@@ -86,8 +95,8 @@ export default class Setting extends React.PureComponent<
   /**
    * Update no data message
    */
-  onNoDataMessageChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    this.onChartOptionChange('noDataMessage', evt.target.value)
+  onNoDataMessageChange = (value: string) => {
+    this.onChartOptionChange('noDataMessage', value)
   }
 
   /**
@@ -265,8 +274,8 @@ export default class Setting extends React.PureComponent<
               className="w-100"
               type="text"
               size="sm"
-              value={config.chartOptions?.title || ''}
-              onChange={this.onTitleChange}
+              defaultValue={config.chartOptions?.title || ''}
+              onAcceptValue={this.onTitleChange}
               placeholder="Enter chart title"
               aria-label="Chart title"
             />
@@ -318,8 +327,8 @@ export default class Setting extends React.PureComponent<
               className="w-100"
               type="text"
               size="sm"
-              value={config.chartOptions?.noDataMessage || ''}
-              onChange={this.onNoDataMessageChange}
+              defaultValue={config.chartOptions?.noDataMessage || ''}
+              onAcceptValue={this.onNoDataMessageChange}
               placeholder="No data available"
               aria-label="No data message"
             />
