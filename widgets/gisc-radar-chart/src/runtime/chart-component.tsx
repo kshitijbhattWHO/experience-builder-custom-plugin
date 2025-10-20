@@ -8,6 +8,7 @@ import {
   Filler,
   Tooltip,
   Legend,
+  Title,
   type ChartData,
   type ChartOptions as ChartJSOptions
 } from 'chart.js'
@@ -22,7 +23,8 @@ ChartJS.register(
   LineElement,
   Filler,
   Tooltip,
-  Legend
+  Legend,
+  Title
 )
 
 /**
