@@ -51,8 +51,8 @@ export default class Setting extends React.PureComponent<
   /**
    * Update chart title
    */
-  onTitleChange = (value: string) => {
-    this.onChartOptionChange('title', value)
+  onTitleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    this.onChartOptionChange('title', evt.target.value)
   }
 
   /**
@@ -86,8 +86,8 @@ export default class Setting extends React.PureComponent<
   /**
    * Update no data message
    */
-  onNoDataMessageChange = (value: string) => {
-    this.onChartOptionChange('noDataMessage', value)
+  onNoDataMessageChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    this.onChartOptionChange('noDataMessage', evt.target.value)
   }
 
   /**
@@ -262,12 +262,11 @@ export default class Setting extends React.PureComponent<
         <SettingSection title="Chart Options">
           <SettingRow level={2} label="Title" flow="wrap">
             <TextInput
-              key={config.chartOptions?.title || 'empty-title'}
               className="w-100"
               type="text"
               size="sm"
-              defaultValue={config.chartOptions?.title || ''}
-              onAcceptValue={this.onTitleChange}
+              value={config.chartOptions?.title || ''}
+              onChange={this.onTitleChange}
               placeholder="Enter chart title"
               aria-label="Chart title"
             />
@@ -316,12 +315,11 @@ export default class Setting extends React.PureComponent<
               Custom message when no data is available
             </Label>
             <TextInput
-              key={config.chartOptions?.noDataMessage || 'empty-message'}
               className="w-100"
               type="text"
               size="sm"
-              defaultValue={config.chartOptions?.noDataMessage || ''}
-              onAcceptValue={this.onNoDataMessageChange}
+              value={config.chartOptions?.noDataMessage || ''}
+              onChange={this.onNoDataMessageChange}
               placeholder="No data available"
               aria-label="No data message"
             />
