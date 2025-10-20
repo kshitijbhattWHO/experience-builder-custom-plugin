@@ -265,7 +265,7 @@ export default class Setting extends React.PureComponent<
               className="w-100"
               type="text"
               size="sm"
-              value={config.chartOptions?.title || ''}
+              defaultValue={config.chartOptions?.title || ''}
               onAcceptValue={this.onTitleChange}
               placeholder="Enter chart title"
               aria-label="Chart title"
@@ -318,7 +318,7 @@ export default class Setting extends React.PureComponent<
               className="w-100"
               type="text"
               size="sm"
-              value={config.chartOptions?.noDataMessage || ''}
+              defaultValue={config.chartOptions?.noDataMessage || ''}
               onAcceptValue={this.onNoDataMessageChange}
               placeholder="No data available"
               aria-label="No data message"
