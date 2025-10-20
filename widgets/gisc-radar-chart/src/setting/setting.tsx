@@ -262,6 +262,7 @@ export default class Setting extends React.PureComponent<
         <SettingSection title="Chart Options">
           <SettingRow level={2} label="Title" flow="wrap">
             <TextInput
+              key={config.chartOptions?.title || 'empty-title'}
               className="w-100"
               type="text"
               size="sm"
@@ -315,6 +316,7 @@ export default class Setting extends React.PureComponent<
               Custom message when no data is available
             </Label>
             <TextInput
+              key={config.chartOptions?.noDataMessage || 'empty-message'}
               className="w-100"
               type="text"
               size="sm"
