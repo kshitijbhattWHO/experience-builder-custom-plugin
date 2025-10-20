@@ -260,52 +260,57 @@ export default class Setting extends React.PureComponent<
 
         {/* Chart Options Section */}
         <SettingSection title="Chart Options">
-          <SettingRow label="Title" flow="wrap">
+          <SettingRow level={2} label="Title" flow="wrap">
             <TextInput
               className="w-100"
               type="text"
               size="sm"
               value={config.chartOptions?.title || ''}
-              onChange={this.onTitleChange}
+              onAcceptValue={this.onTitleChange}
               placeholder="Enter chart title"
+              aria-label="Chart title"
             />
           </SettingRow>
 
-          <SettingRow label="Show Legend">
+          <SettingRow level={2} label="Show Legend">
             <Switch
               checked={config.chartOptions?.showLegend ?? true}
               onChange={this.onLegendToggle}
+              aria-label="Show legend"
             />
           </SettingRow>
 
-          <SettingRow label="Show Grid">
+          <SettingRow level={2} label="Show Grid">
             <Switch
               checked={config.chartOptions?.showGrid ?? true}
               onChange={this.onGridToggle}
+              aria-label="Show grid"
             />
           </SettingRow>
 
-          <SettingRow label="Scale Minimum" flow="wrap">
+          <SettingRow level={2} label="Scale Minimum" flow="wrap">
             <NumericInput
               className="w-100"
               size="sm"
               value={config.chartOptions?.scaleMin ?? 0}
               onChange={this.onScaleMinChange}
               min={0}
+              aria-label="Scale minimum"
             />
           </SettingRow>
 
-          <SettingRow label="Scale Maximum" flow="wrap">
+          <SettingRow level={2} label="Scale Maximum" flow="wrap">
             <NumericInput
               className="w-100"
               size="sm"
               value={config.chartOptions?.scaleMax ?? 100}
               onChange={this.onScaleMaxChange}
               min={1}
+              aria-label="Scale maximum"
             />
           </SettingRow>
 
-          <SettingRow label="No Data Message" flow="wrap">
+          <SettingRow level={2} label="No Data Message" flow="wrap">
             <Label className="w-100 text-break" style={{ fontSize: '0.75rem', color: '#6c757d', marginBottom: '4px' }}>
               Custom message when no data is available
             </Label>
@@ -314,8 +319,9 @@ export default class Setting extends React.PureComponent<
               type="text"
               size="sm"
               value={config.chartOptions?.noDataMessage || ''}
-              onChange={this.onNoDataMessageChange}
+              onAcceptValue={this.onNoDataMessageChange}
               placeholder="No data available"
+              aria-label="No data message"
             />
           </SettingRow>
         </SettingSection>
