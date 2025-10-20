@@ -277,6 +277,70 @@ const WidgetWithDataSourceManagers = (props: AllWidgetProps<IMConfig>): JSX.Elem
 const Widget = (props: AllWidgetProps<IMConfig>): JSX.Element => {
   const { config, useDataSources } = props
 
+  // Build version tracking - searchable in console
+  React.useEffect(() => {
+    const now = new Date()
+    const buildInfo = {
+      widget: 'GISC-RADAR-CHART',
+      version: '2.0.0-alpha-phase11',
+      buildDate: '2025-10-20',
+      buildTime: now.toLocaleTimeString('en-US', { hour12: false }),
+      loadedAt: now.toISOString(),
+      phase: 'Phase 11 - Chart Title Fix',
+      features: ['Chart Title Plugin', 'defaultValue + onAcceptValue', 'No Recursion'],
+      status: 'DEPLOYED'
+    }
+
+    console.log(
+      '%c╔════════════════════════════════════════════════════════════════╗',
+      'color: #00d4ff; font-weight: bold; font-size: 14px;'
+    )
+    console.log(
+      '%c║  🎯 GISC RADAR CHART - BUILD INFO                              ║',
+      'color: #00d4ff; font-weight: bold; font-size: 14px;'
+    )
+    console.log(
+      '%c╠════════════════════════════════════════════════════════════════╣',
+      'color: #00d4ff; font-weight: bold; font-size: 14px;'
+    )
+    console.log(
+      `%c║  Version:     ${buildInfo.version.padEnd(45)} ║`,
+      'color: #00ff00; font-weight: bold; font-size: 13px;'
+    )
+    console.log(
+      `%c║  Build Date:  ${buildInfo.buildDate.padEnd(45)} ║`,
+      'color: #ffffff; font-size: 12px;'
+    )
+    console.log(
+      `%c║  Loaded At:   ${buildInfo.loadedAt.padEnd(45)} ║`,
+      'color: #ffffff; font-size: 12px;'
+    )
+    console.log(
+      `%c║  Phase:       ${buildInfo.phase.padEnd(45)} ║`,
+      'color: #ffaa00; font-weight: bold; font-size: 12px;'
+    )
+    console.log(
+      `%c║  Status:      ${buildInfo.status.padEnd(45)} ║`,
+      'color: #00ff00; font-weight: bold; font-size: 13px;'
+    )
+    console.log(
+      '%c╠════════════════════════════════════════════════════════════════╣',
+      'color: #00d4ff; font-weight: bold; font-size: 14px;'
+    )
+    console.log(
+      `%c║  Features: ${buildInfo.features.join(', ').padEnd(48)} ║`,
+      'color: #ffff00; font-size: 12px;'
+    )
+    console.log(
+      '%c╚════════════════════════════════════════════════════════════════╝',
+      'color: #00d4ff; font-weight: bold; font-size: 14px;'
+    )
+    console.log(
+      '%c[GISC-RADAR-CHART] Widget initialized successfully',
+      'color: #00ff00; font-weight: bold; background: #000; padding: 4px 8px; border-radius: 3px;'
+    )
+  }, [])
+
   // If no data source configured, show mock data (validation not needed for mock data)
   if (!useDataSources || useDataSources.length === 0) {
     const mockData = generateMockData()
