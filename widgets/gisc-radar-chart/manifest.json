@@ -18,8 +18,7 @@
     {
       "name": "updateChart",
       "label": "Update Chart",
-      "uri": "message-actions/update-chart-action",
-      "settingUri": "message-actions/update-chart-action-setting"
+      "uri": "message-actions/update-chart-action"
     }
   ],
   "properties": {
