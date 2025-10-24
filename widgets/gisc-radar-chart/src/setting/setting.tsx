@@ -3,7 +3,8 @@ import {
   React,
   jsx,
   Immutable,
-  type UseDataSource
+  type UseDataSource,
+  type DataSourceJson
 } from 'jimu-core'
 import type { AllWidgetSettingProps } from 'jimu-for-builder'
 import {
@@ -18,6 +19,7 @@ import ByGroupConfigComponent from './components/by-group-config'
 import ByFieldConfigComponent from './components/by-field-config'
 import { getSettingStyle } from './styles'
 import { createByGroupQuery, createByFieldQuery } from '../utils/query-builder'
+import OutputSourceManager from './data-source'
 
 /**
  * Settings panel for GISC Radar Chart Widget
@@ -29,12 +31,55 @@ export default class Setting extends React.PureComponent<
 > {
   /**
    * Handle data source change
+   * When data source changes, also update output data source origin
    */
   onDataSourceChange = (useDataSources: UseDataSource[]) => {
+    const { outputDataSources } = this.props
+    const outputDataSourceId = outputDataSources?.[0]
+
+    if (outputDataSourceId) {
+      // Update output data source to point to new origin data source
+      this.props.onSettingChange({
+        id: this.props.id,
+        useDataSources: useDataSources
+      })
+    } else {
+      this.props.onSettingChange({
+        id: this.props.id,
+        useDataSources: useDataSources
+      })
+    }
+  }
+
+  /**
+   * Handle output data source creation
+   * Called when OutputSourceManager creates the output data source
+   */
+  onOutputDataSourceCreate = (dataSourceJson: DataSourceJson) => {
+    console.log('[Setting] Output data source created:', dataSourceJson.id)
     this.props.onSettingChange({
-      id: this.props.id,
-      useDataSources: useDataSources
-    })
+      id: this.props.id
+    }, [dataSourceJson])
+  }
+
+  /**
+   * Handle output data source fields change
+   * Called when output data source schema changes
+   */
+  onOutputFieldsChange = (fields: string[]) => {
+    const { useDataSources } = this.props
+    if (useDataSources) {
+      const updatedUseDataSources = Immutable.setIn(
+        useDataSources,
+        ['0', 'fields'],
+        fields
+      ).asMutable({ deep: true })
+
+      this.props.onSettingChange({
+        id: this.props.id,
+        useDataSources: updatedUseDataSources
+      })
+    }
   }
 
   /**
@@ -344,6 +389,31 @@ export default class Setting extends React.PureComponent<
             onColorsChange={this.onColorsChange}
           />
         </SettingSection>
+
+        {/* Output Data Source Manager - CRITICAL for message actions */}
+        {/* This component registers the output data source with Experience Builder */}
+        {/* Without this, the output data source won't appear in the Action tab */}
+        {/* The schema includes fields from the chart configuration so they appear in field mapping UI */}
+        {!!useDataSources?.length && (
+          <OutputSourceManager
+            widgetId={this.props.id}
+            dataSourceId={this.props.outputDataSources?.[0]}
+            originalUseDataSource={useDataSources[0]}
+            categoryField={
+              config.radarChartDataSource?.byGroupConfig?.categoryField ||
+              config.fieldMapping?.labelField
+            }
+            valueFields={
+              config.radarChartDataSource?.byGroupConfig?.numericField
+                ? [config.radarChartDataSource.byGroupConfig.numericField]
+                : config.radarChartDataSource?.byFieldConfig?.numericFields ||
+                  config.fieldMapping?.valueFields
+            }
+            splitByField={config.radarChartDataSource?.byGroupConfig?.splitByField}
+            onCreate={this.onOutputDataSourceCreate}
+            onFieldsChange={this.onOutputFieldsChange}
+          />
+        )}
         </div>
         </div>
     )
