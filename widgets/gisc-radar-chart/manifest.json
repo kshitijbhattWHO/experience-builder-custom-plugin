@@ -14,13 +14,6 @@
       "messageCarryData": "OUTPUT_DATA_SOURCE"
     }
   ],
-  "messageActions": [
-    {
-      "name": "updateChart",
-      "label": "Update Chart",
-      "uri": "message-actions/update-chart-action"
-    }
-  ],
   "properties": {
     "hasSettingPage": true,
     "canConsumeDataAction": true,
